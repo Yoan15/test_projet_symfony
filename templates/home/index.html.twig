@@ -11,5 +11,18 @@
 <div class="d-flex justify-content-center mt-2">
     <h1>Bienvenue sur la page d'accueil</h1>
 </div>
+<div class="row justify-content-center">
+    {% for article in articles %}
+    <div class="card col-md-4" style="width: 18rem;">
+        <img src="{{ article.image }}" class="card-img-top mt-2" alt="{{ article.title }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <p class="date">Ecrit le : {{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }}</p>
+            <a href="{{ path('article', {'id':article.id}) }}" class="btn btn-primary">Voir l'article</a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
 
 {% endblock %}
