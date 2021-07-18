@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ article.title }}{% endblock %}
+
 {% block body %}
     <div class="container-fluid">
         <div class="img-fluid d-flex justify-content-center mt-2 mb-2">
@@ -7,7 +9,7 @@
         </div>
         <div class="content">
             <p class="date">Ecrit le : {{ article.createdAt | date("d/m/Y") }} à {{ article.createdAt | date("H:i") }} par {{ article.author }}</p>
-            <h1 class="title justify-content-center mb-3">{{ article.title }}</h1>
+            <h1 class="title d-flex justify-content-center mb-3">{{ article.title }}</h1>
             <p class="content text-justify">{{ article.content | raw }}</p>
         </div>
     </div>
