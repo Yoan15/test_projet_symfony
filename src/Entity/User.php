@@ -6,11 +6,19 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="user")
+ * @UniqueEntity(
+ *  fields = {"email"},
+ *  message= "L'email est déjà existant !"
+ * )
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -25,21 +33,25 @@ class User
     private $username;
 
     /**
+     * @Assert\Length(min=2, max=60)
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     * @Assert\Length(min=2, max=60)
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
     /**
+     * @Assert\Email(message="L'email tapé n'est pas valide !")
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Assert\Length(min=4, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $password;
@@ -54,6 +66,9 @@ class User
      */
     private $articles;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Les deux mots de passe doivent être identiques !")
+     */
     private $passwordConfirm;
 
     public function __construct()
@@ -184,5 +199,20 @@ class User
         }
 
         return $this;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function eraseCredentials()
+    {
+        
     }
 }
