@@ -58,4 +58,10 @@ class HomeController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
+    // #[Route('/addArticle', name:'addArticle')]
+    // public function addArticle(Article $article): Response
+    // {
+
+    // }
 }
