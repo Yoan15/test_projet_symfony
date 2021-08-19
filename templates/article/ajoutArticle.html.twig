@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ controller_name }}</h1>
+        <div class="row">
+            {{ form_start(form_addArticle) }}
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        {{ form_row(form_addArticle.title, {'label': "Titre : ", 'attr': {'placeholder': "Titre de l'article..."}}) }}
+                    </div>
+                    <div class="col-12 mb-2">
+                        {{ form_row(form_addArticle.content, {'label': "Contenu : ", 'attr': {'placeholder': "Contenu de l'article..."}}) }}
+                    </div>
+                    <div class="col-12 mb-2">
+                        {{ form_row(form_addArticle.image, {'label': "Image : "}) }}
+                    </div>
+                    <div class="col-12 mb-2">
+                        {{ form_row(form_addArticle.category, {'label': "Catégorie : "}) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(form_addArticle.author, {'label': "Auteur : "}) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Ajouter article</button>
+            {{ form_end(form_addArticle) }}
+        </div>
+    </div>
+{% endblock %}
